@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>web-component test</title>
+  </head>
+  <body>
+    <script>
+      class MyComponent extends HTMLElement {
+        constructor() {
+          super();
+          this.shadow = this.attachShadow({ mode: "open" });
+        }
+
+        connectedCallback() {
+          this.shadow.innerHTML = `
+            <p>Hello from a web component!</p>
+            <style>
+              p {
+                color: pink;
+                font-weight: bold;
+                padding: 1rem;
+                border: 4px solid pink;
+              }
+            </style>
+          `;
+        }
+      }
+
+      customElements.define("my-component", MyComponent);
+    </script>
+
+    <h1>web-component test</h1>
+    https://jakelazaroff.com/words/web-components-eliminate-javascript-framework-lock-in/<br>
+    folgend das web component
+    <br>
+
+    <my-component></my-component>
+    <script>
+      const myComponent = document.querySelector("my-component");
+      console.log(myComponent instanceof MyComponent); // true
+    </script>
+  </body>
+</html>
